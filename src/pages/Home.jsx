@@ -130,6 +130,10 @@ const Home = () => {
         ...prevState,
         endDate: value, 
       }));
+    }else{
+      setDate({startDate:'',endDate:''})
+      setAssigne('')
+      setStatus('')
     }
   }
 

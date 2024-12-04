@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  User,
-  LogOut,
-  Menu,
-  X,
-  Sparkles
-} from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { User, LogOut, Menu, X, Sparkles } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../api/userApi";
+import { userLogout } from "../redux/userSlice";
 
 const Navbar = () => {
-  const [userData, setUserData] = useState(null); // Replace with actual user data logic
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const userData = useSelector((state)=> state.user.userData)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const motivationalQuotes = [
     "Progress is progress.",
@@ -24,8 +23,15 @@ const Navbar = () => {
     motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)]
   );
 
-  const handleLogout = () => {
-    // Implement logout logic
+  const handleLogout = async () => {
+    try {
+      await logout()
+      dispatch(userLogout())
+      navigate('/login')
+    } catch (error) {
+      console.log(error);
+      
+    }
   };
 
   return (
@@ -79,9 +85,9 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex space-x-3">
-  <Link
-    to="/register"
-    className="
+                <Link
+                  to="/register"
+                  className="
       px-4 py-1 
       border border-gray-800 
       text-gray-800 
@@ -91,12 +97,12 @@ const Navbar = () => {
       transition duration-200
       hover:bg-gray-800 hover:text-white
     "
-  >
-    Register
-  </Link>
-  <Link
-    to="/login"
-    className="
+                >
+                  Register
+                </Link>
+                <Link
+                  to="/login"
+                  className="
       px-5 py-1.5 
      border border-gray-800 
       text-gray-800 
@@ -106,10 +112,10 @@ const Navbar = () => {
       transition duration-200
       hover:bg-gray-800 hover:text-white    
     "
-  >
-    Login
-  </Link>
-</div>
+                >
+                  Login
+                </Link>
+              </div>
             )}
           </div>
         </div>

@@ -38,8 +38,8 @@ const Login = () => {
         toast.success("Logged in successfully!");
         navigate("/");
       }
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed. Try again.");
+    } catch (error) {      
+      toast.error(error.message || "Login failed. Try again.");
     } finally {
       setLoading(false);
     }

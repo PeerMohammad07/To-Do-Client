@@ -10,12 +10,10 @@ Api.interceptors.response.use(
     return response;
   },
   (error) => {
-    // Centralized error handling
     if (error.response) {
       const statusCode = error.response.status;
       const backendMessage = error.response.data.message; 
-
-      // Use backend error message or fallback to a generic one
+      
       let errorMessage = backendMessage || "Something went wrong.";
 
       if (!backendMessage) {

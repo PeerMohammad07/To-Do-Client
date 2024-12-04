@@ -1,5 +1,6 @@
 import { Sidebar } from "lucide-react";
 import React from "react";
+import { Edit, Trash2 } from "lucide-react"; // Importing icons from Lucide React
 
 const TaskListing = ({ tasks, onEdit, onDelete, onFilter, addTask }) => {
   return (
@@ -38,13 +39,13 @@ const TaskListing = ({ tasks, onEdit, onDelete, onFilter, addTask }) => {
                 className="hover:text-green-500"
                 onClick={() => onEdit(task)}
               >
-                <i className="fas fa-edit text-lg"></i>
+                <Edit className="w-5 h-5" /> {/* Edit icon */}
               </button>
               <button
                 className="hover:text-red-500"
                 onClick={() => onDelete(task._id)}
               >
-                <i className="fas fa-trash-alt text-lg"></i>
+                <Trash2 className="w-5 h-5" />
               </button>
             </div>
           </div>
