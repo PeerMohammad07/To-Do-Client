@@ -24,3 +24,35 @@ export const registerApi = async (data) => {
     return Promise.reject(error)
   }
 }
+
+export const createTask = async (data) =>{
+  try {
+    return await Api.post(userEndPoints.tasks,data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export const deleteTask = async (taskId) =>{
+  try {
+    return await Api.delete(`${userEndPoints.tasks}/${taskId}`)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export const editTask = async (data)=>{
+  try {    
+    return await Api.put(`${userEndPoints.tasks}/${data._id}`,data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export const getAllTasks = async (status,assigne,date)=>{
+  try {
+    return await Api.get(`${userEndPoints.tasks}/?status=${status}&assigne=${assigne}&data=${JSON.stringify(date)}`);
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
